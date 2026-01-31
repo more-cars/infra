@@ -1,0 +1,19 @@
+{
+  "author": "Dennis Gerike",
+  "dependencies": {
+    "@inquirer/prompts": "8.2.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3"
+  },
+  "description": "Infrastructure tools for the open car database 'More Cars'",
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "name": "@more-cars/infra",
+  "repository": "https://github.com/more-cars/infra",
+  "scripts": {
+    "start": "./deploy-infrastructure.sh"
+  },
+  "version": "0.1.0"
+}
