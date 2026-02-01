@@ -3,12 +3,12 @@ kind: Gateway
 metadata:
   name: more-cars-gateway
 spec:
-  gatewayClassName: nginx
+  gatewayClassName: gke-l7-global-external-managed
   listeners:
     - name: more-cars
       port: 443
       protocol: HTTPS
-      hostname: "*.more-cars.internal"
+      hostname: "*.fast-cars.info"
       tls:
         mode: Terminate
         certificateRefs:
