@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "op": "replace",
+    "path": "/spec/gatewayClassName",
+    "value": "gke-l7-global-external-managed"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/listeners/0/hostname",
+    "value": "*.testing.fast-cars.info"
+  }
+]

@@ -1,4 +1,6 @@
 import fs from "node:fs"
+import {getHostname} from "./getHostname"
+import {getGatewayClassName} from "./getGatewayClassName"
 
 createGatewayPatchFile()
     .then((data) => {
@@ -8,16 +10,19 @@ createGatewayPatchFile()
     })
 
 async function createGatewayPatchFile() {
+    const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
+    const targetCluster = process.env.TARGET_CLUSTER || 'gke'
+
     return [
         {
             "op": "replace",
             "path": "/spec/gatewayClassName",
-            "value": "nginx"
+            "value": getGatewayClassName(targetCluster)
         },
         {
             "op": "replace",
             "path": "/spec/listeners/0/hostname",
-            "value": "*.more-cars.internal"
+            "value": getHostname(targetCluster, targetEnvironment),
         },
     ]
 }
