@@ -18,10 +18,13 @@ async function createGatewayPatchFile() {
             "op": "replace",
             "path": "/spec/gatewayClassName",
             "value": getGatewayClassName(targetCluster)
-        },
-        {
+        }, {
             "op": "replace",
             "path": "/spec/listeners/0/hostname",
+            "value": getHostname(targetCluster, targetEnvironment),
+        }, {
+            "op": "replace",
+            "path": "/spec/listeners/1/hostname",
             "value": getHostname(targetCluster, targetEnvironment),
         },
     ]

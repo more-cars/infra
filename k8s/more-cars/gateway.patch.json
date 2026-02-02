@@ -2,11 +2,16 @@
   {
     "op": "replace",
     "path": "/spec/gatewayClassName",
-    "value": "gke-l7-global-external-managed"
+    "value": "nginx"
   },
   {
     "op": "replace",
     "path": "/spec/listeners/0/hostname",
-    "value": "*.testing.fast-cars.info"
+    "value": "*.prod.more-cars.internal"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/listeners/1/hostname",
+    "value": "*.prod.more-cars.internal"
   }
 ]

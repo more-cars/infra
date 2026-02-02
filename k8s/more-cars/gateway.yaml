@@ -5,7 +5,11 @@ metadata:
 spec:
   gatewayClassName: gke-l7-global-external-managed
   listeners:
-    - name: more-cars
+    - name: more-cars-http
+      port: 80
+      protocol: HTTP
+      hostname: "*.default.fast-cars.info"
+    - name: more-cars-https
       port: 443
       protocol: HTTPS
       hostname: "*.default.fast-cars.info"
