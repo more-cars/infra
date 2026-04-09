@@ -9,6 +9,13 @@ createGatewayPatchFile()
         fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
     })
 
+createAnalyticsPatchFile()
+    .then((data) => {
+        const path = __dirname + '/../k8s/more-cars/'
+        const filename = 'analytics.patch.json'
+        fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
+    })
+
 async function createGatewayPatchFile() {
     const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
     const targetCluster = process.env.TARGET_CLUSTER || 'gke'
@@ -26,6 +33,19 @@ async function createGatewayPatchFile() {
             "op": "replace",
             "path": "/spec/listeners/1/hostname",
             "value": getHostname(targetCluster, targetEnvironment),
+        },
+    ]
+}
+
+async function createAnalyticsPatchFile() {
+    const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
+    const targetCluster = process.env.TARGET_CLUSTER || 'gke'
+
+    return [
+        {
+            "op": "replace",
+            "path": "/spec/hostnames/0",
+            "value": getHostname(targetCluster, targetEnvironment).replace('*', 'analytics'),
         },
     ]
 }

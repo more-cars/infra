@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: analytics
+  template:
+    metadata:
+      labels:
+        app: analytics
+    spec:
+      containers:
+        - name: matomo
+          image: matomo:5-apache
+          ports:
+            - containerPort: 80
+          env:
+            - name: MATOMO_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+            - name: MATOMO_DATABASE_ADAPTER
+              value: "mysql"
+            - name: MATOMO_DATABASE_NAME
+              value: "matomo"
+            - name: MATOMO_DATABASE_USER
+              value: "matomo"
+          volumeMounts:
+            - name: analytics
+              mountPath: /var/www/html
+            - name: analytics-config
+              mountPath: /var/www/html/config/config.ini.php.override
+              subPath: config.ini.php.override
+      volumes:
+        - name: analytics
+          persistentVolumeClaim:
+            claimName: analytics
+        - name: analytics-config
+          configMap:
+            name: analytics-config
