@@ -32,6 +32,10 @@ spec:
               value: "matomo"
             - name: MARIADB_USER
               value: "matomo"
+          resources:
+            requests:
+              cpu: "5m"
+              memory: "150Mi"
           volumeMounts:
             - name: analytics-db
               mountPath: /var/lib/mysql

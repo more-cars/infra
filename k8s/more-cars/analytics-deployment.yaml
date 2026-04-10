@@ -35,6 +35,10 @@ spec:
             - name: analytics-config
               mountPath: /var/www/html/config/config.ini.php.override
               subPath: config.ini.php.override
+          resources:
+            requests:
+              cpu: "5m"
+              memory: "350Mi"
       volumes:
         - name: analytics
           persistentVolumeClaim:
