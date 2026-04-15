@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: analytics-config
+  name: analytics-php-config
 data:
   config.ini.php.override: |
     [General]

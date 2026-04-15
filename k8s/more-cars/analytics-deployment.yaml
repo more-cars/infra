@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: matomo
-          image: matomo:5-apache
+          image: matomo:5.8.0-fpm-alpine
           ports:
             - containerPort: 80
           env:
             - name: MATOMO_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: analytics-db-credentials
                   key: password
             - name: MATOMO_DATABASE_ADAPTER
               value: "mysql"
@@ -32,7 +32,7 @@ spec:
           volumeMounts:
             - name: analytics
               mountPath: /var/www/html
-            - name: analytics-config
+            - name: analytics-php-config
               mountPath: /var/www/html/config/config.ini.php.override
               subPath: config.ini.php.override
           resources:
@@ -43,6 +43,6 @@ spec:
         - name: analytics
           persistentVolumeClaim:
             claimName: analytics
-        - name: analytics-config
+        - name: analytics-php-config
           configMap:
-            name: analytics-config
+            name: analytics-php-config

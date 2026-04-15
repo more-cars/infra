@@ -21,12 +21,12 @@ spec:
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: analytics-db-credentials
                   key: password
             - name: MARIADB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: analytics-db-credentials
                   key: password
             - name: MARIADB_DATABASE
               value: "matomo"
