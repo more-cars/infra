@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: matomo
-          image: matomo:5.8.0-fpm-alpine
+          image: matomo:5.8.0-apache
           ports:
             - containerPort: 80
           env:
