@@ -18,3 +18,12 @@ spec:
         certificateRefs:
           - kind: Secret
             name: certificate-more-cars-wildcard
+    - name: more-cars-public-https
+      port: 443
+      protocol: HTTPS
+      hostname: "more-cars.net"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: certificate-more-cars
