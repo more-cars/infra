@@ -47,7 +47,7 @@ There should be no need to replace it, because it is not possible to create a va
 For GKE, the certificate can be added via the following command:
 
 ```
-./deployment/lib/store-certificate-as-k8s-secret.sh api <NAMESPACE> <CERTIFICATE_PATH>
+./lib/store-certificate-as-k8s-secret.sh api <NAMESPACE> <CERTIFICATE_PATH>
 ```
 
 This will create a "Kubernetes Secret" with the name `certificate-more-cars-wildcard` in the given namespace (e.g.

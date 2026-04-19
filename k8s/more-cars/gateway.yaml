@@ -8,11 +8,11 @@ spec:
     - name: more-cars-http
       port: 80
       protocol: HTTP
-      hostname: "*.default.fast-cars.info"
+      hostname: "*.default.more-cars.net"
     - name: more-cars-https
       port: 443
       protocol: HTTPS
-      hostname: "*.default.fast-cars.info"
+      hostname: "*.default.more-cars.net"
       tls:
         mode: Terminate
         certificateRefs:
