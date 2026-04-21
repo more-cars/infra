@@ -37,8 +37,8 @@ spec:
               subPath: config.ini.php.override
           resources:
             requests:
-              cpu: "5m"
-              memory: "350Mi"
+              cpu: "250m"
+              memory: "800Mi"
       volumes:
         - name: analytics
           persistentVolumeClaim:

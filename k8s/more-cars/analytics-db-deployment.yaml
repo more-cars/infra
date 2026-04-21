@@ -34,8 +34,8 @@ spec:
               value: "matomo"
           resources:
             requests:
-              cpu: "5m"
-              memory: "150Mi"
+              cpu: "50m"
+              memory: "600Mi"
           volumeMounts:
             - name: analytics-db
               mountPath: /var/lib/mysql
