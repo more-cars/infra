@@ -3,21 +3,9 @@ kind: Kustomization
 
 resources:
   - gateway.yaml
-  - analytics-db-service.yaml
-  - analytics-db-deployment.yaml
-  - analytics-db-pvc.yaml
-  - analytics-service.yaml
-  - analytics-deployment.yaml
-  - analytics-php-config-configmap.yaml
-  - analytics-pvc.yaml
-  - analytics-https-route.yaml
 
 patches:
   - path: gateway.patch.json
     target:
       kind: Gateway
       name: more-cars-gateway
-  - path: analytics.patch.json
-    target:
-      kind: HTTPRoute
-      name: analytics-https

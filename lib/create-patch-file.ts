@@ -10,8 +10,12 @@ createGatewayPatchFile()
     })
 
 createAnalyticsPatchFile()
-    .then((data) => {
-        const path = __dirname + '/../k8s/more-cars/'
+    .then(data => {
+        if (process.env.TARGET_ENVIRONMENT !== 'prod') {
+            return
+        }
+
+        const path = __dirname + '/../k8s/overlays/prod/'
         const filename = 'analytics.patch.json'
         fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
     })
