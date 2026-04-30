@@ -10,6 +10,7 @@ resources:
   - analytics-deployment.yaml
   - analytics-pvc.yaml
   - analytics-https-route.yaml
+  - analytics-health-check.yaml
 
 namespace: prod
 

@@ -1,0 +1,13 @@
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: analytics-health-check
+spec:
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        requestPath: /robots.txt
+  targetRef:
+    kind: Service
+    name: analytics
