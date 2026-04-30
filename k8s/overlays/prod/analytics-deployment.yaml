@@ -32,9 +32,6 @@ spec:
           volumeMounts:
             - name: analytics
               mountPath: /var/www/html
-            - name: analytics-php-config
-              mountPath: /var/www/html/config/config.ini.php.override
-              subPath: config.ini.php.override
           resources:
             requests:
               cpu: "175m"
@@ -43,6 +40,3 @@ spec:
         - name: analytics
           persistentVolumeClaim:
             claimName: analytics
-        - name: analytics-php-config
-          configMap:
-            name: analytics-php-config

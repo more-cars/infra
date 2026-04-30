@@ -8,7 +8,6 @@ resources:
   - analytics-db-pvc.yaml
   - analytics-service.yaml
   - analytics-deployment.yaml
-  - analytics-php-config-configmap.yaml
   - analytics-pvc.yaml
   - analytics-https-route.yaml
 
