@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mock-servers
+spec:
+  selector:
+    app: mock-servers
+  ports:
+    - name: youtube
+      port: 3004
+      targetPort: 3004
+    - name: wikimedia
+      port: 3005
+      targetPort: 3005
+    - name: flickr
+      port: 3006
+      targetPort: 3006

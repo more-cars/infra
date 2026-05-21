@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - ../../more-cars
   - namespace.yaml
+  - mock-servers-deployment.yaml
+  - mock-servers-service.yaml
 
 namespace: testing
