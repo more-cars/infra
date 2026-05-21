@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-servers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mock-servers
+  template:
+    metadata:
+      labels:
+        app: mock-servers
+    spec:
+      containers:
+        - name: more-cars-api
+          image: ghcr.io/more-cars/rest-api-rc:latest
+          resources:
+            requests:
+              cpu: "30m"
+              memory: "300Mi"
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              npm ci
+
+              npm run local:mockserver:start
