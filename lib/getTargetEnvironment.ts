@@ -18,12 +18,6 @@ async function promptUser(cluster: string) {
         },
     ]
 
-    if (cluster === 'minikube') {
-        choices.push({
-            value: 'dev',
-        })
-    }
-
     return select({
         message: 'In which environment should the infrastructure be deployed?',
         default: 'testing',
