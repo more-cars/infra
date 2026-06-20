@@ -9,5 +9,6 @@ spec:
       httpHealthCheck:
         requestPath: /robots.txt
   targetRef:
+    group: ""
     kind: Service
     name: analytics
