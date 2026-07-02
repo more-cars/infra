@@ -17,6 +17,7 @@ if [ "$TARGET_CLUSTER" = minikube ]; then
   npx ts-node "$SCRIPT_PATH"/lib/create-patch-file.ts
   kubectl config use-context morecars
   kubectl config set-context --current --namespace="$TARGET_ENVIRONMENT"
+  "$SCRIPT_PATH"/deploy-secrets.sh "$TARGET_ENVIRONMENT" morecars
   kubectl apply -k "$SCRIPT_PATH"/k8s/overlays/"$TARGET_ENVIRONMENT"
 
   # storing the certificate as kubernetes secret (if it doesn't exist yet)
@@ -26,5 +27,6 @@ elif [ "$TARGET_CLUSTER" = gke ]; then
   gcloud container clusters get-credentials more-cars --region=europe-west1-b
   kubectl config use-context gke_more-cars_europe-west1-b_more-cars
   kubectl config set-context --current --namespace="$TARGET_ENVIRONMENT"
+  "$SCRIPT_PATH"/deploy-secrets.sh "$TARGET_ENVIRONMENT" gke_more-cars_europe-west1-b_more-cars
   kubectl apply -k "$SCRIPT_PATH"/k8s/overlays/"$TARGET_ENVIRONMENT"
 fi
