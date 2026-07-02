@@ -41,16 +41,8 @@ In GKE a valid one has to be created manually (see next section).
 
 ## TLS Certificate
 
-In Minikube a dummy certificate is automatically added when deploying the infra tool.
-There should be no need to replace it, because it is not possible to create a valid one for local environments anyway.
-
-For GKE, the certificate can be added via the following command:
-
-```
-./lib/store-certificate-as-k8s-secret.sh api <NAMESPACE> <CERTIFICATE_PATH>
-```
-
-This will create a "Kubernetes Secret" with the name `certificate-more-cars-wildcard` in the given namespace (e.g.
-`testing`).
-
-Running the command again will replace the existing certificate.
+A dummy certificate is automatically added when deploying the infra service.
+This is true for all environments and all clusters.
+For Minikube there are no more steps necessary
+because it is not possible to create valid certificates for local environments anyway.
+For GKE the recommended way to replace the dummy certificate is via `headlamp`.

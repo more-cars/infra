@@ -20,3 +20,26 @@ patches:
     target:
       kind: HTTPRoute
       name: analytics-https
+  - target:
+      kind: Gateway
+      name: more-cars-gateway
+    patch: |
+      - op: add
+        path: /spec/listeners/-
+        value:
+          name: more-cars-public-http
+          port: 80
+          protocol: HTTP
+          hostname: "more-cars.net"
+      - op: add
+        path: /spec/listeners/-
+        value:
+          name: more-cars-public-https
+          port: 443
+          protocol: HTTPS
+          hostname: "more-cars.net"
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - kind: Secret
+                name: certificate-more-cars
