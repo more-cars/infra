@@ -20,6 +20,20 @@ createAnalyticsPatchFile()
         fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
     })
 
+createPocketIdDeploymentPatchFile()
+    .then(data => {
+        const path = __dirname + '/../k8s/more-cars/'
+        const filename = 'pocket-id-deployment.patch.json'
+        fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
+    })
+
+createPocketIdHttpsRoutePatchFile()
+    .then(data => {
+        const path = __dirname + '/../k8s/more-cars/'
+        const filename = 'pocket-id-route.patch.json'
+        fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
+    })
+
 async function createGatewayPatchFile() {
     const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
     const targetCluster = process.env.TARGET_CLUSTER || 'gke'
@@ -50,6 +64,35 @@ async function createAnalyticsPatchFile() {
             "op": "replace",
             "path": "/spec/hostnames/0",
             "value": getHostname(targetCluster, targetEnvironment).replace('*', 'analytics'),
+        },
+    ]
+}
+
+async function createPocketIdDeploymentPatchFile() {
+    const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
+    const targetCluster = process.env.TARGET_CLUSTER || 'gke'
+
+    return [
+        {
+            "op": "replace",
+            "path": "/spec/template/spec/containers/0/env/0",
+            "value": {
+                "name": "APP_URL",
+                "value": "https://" + getHostname(targetCluster, targetEnvironment).replace('*', 'pocket-id'),
+            },
+        },
+    ]
+}
+
+async function createPocketIdHttpsRoutePatchFile() {
+    const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
+    const targetCluster = process.env.TARGET_CLUSTER || 'gke'
+
+    return [
+        {
+            "op": "replace",
+            "path": "/spec/hostnames/0",
+            "value": getHostname(targetCluster, targetEnvironment).replace('*', 'pocket-id'),
         },
     ]
 }

@@ -1,0 +1,10 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/env/0",
+    "value": {
+      "name": "APP_URL",
+      "value": "https://pocket-id.testing.more-cars.internal"
+    }
+  }
+]

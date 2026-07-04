@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocket-id
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: pocket-id
+  template:
+    metadata:
+      labels:
+        app: pocket-id
+    spec:
+      containers:
+        - name: pocket-id
+          image: pocketid/pocket-id:v2.9.0
+          env:
+            - name: APP_URL
+              value: "https://pocket-id.default.more-cars.internal"
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  optional: true
+                  name: infra.pocket-id.encryption-key
+                  key: key
+          volumeMounts:
+            - name: pocket-id
+              mountPath: /app/data
+      volumes:
+        - name: pocket-id
+          persistentVolumeClaim:
+            claimName: pocket-id

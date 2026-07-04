@@ -3,9 +3,21 @@ kind: Kustomization
 
 resources:
   - gateway.yaml
+  - pocket-id-pvc.yaml
+  - pocket-id-deployment.yaml
+  - pocket-id-service.yaml
+  - pocket-id-https-route.yaml
 
 patches:
   - path: gateway.patch.json
     target:
       kind: Gateway
       name: more-cars-gateway
+  - path: pocket-id-deployment.patch.json
+    target:
+      kind: Deployment
+      name: pocket-id
+  - path: pocket-id-route.patch.json
+    target:
+      kind: HTTPRoute
+      name: pocket-id
