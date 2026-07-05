@@ -34,13 +34,6 @@ createPocketIdHttpsRoutePatchFile()
         fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
     })
 
-createOauth2ProxyDeploymentPatchFile()
-    .then(data => {
-        const path = __dirname + '/../k8s/more-cars/'
-        const filename = 'oauth2-proxy-deployment.patch.json'
-        fs.writeFileSync(path + filename, JSON.stringify(data, null, 2))
-    })
-
 async function createGatewayPatchFile() {
     const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
     const targetCluster = process.env.TARGET_CLUSTER || 'gke'
@@ -100,38 +93,6 @@ async function createPocketIdHttpsRoutePatchFile() {
             "op": "replace",
             "path": "/spec/hostnames/0",
             "value": getHostname(targetCluster, targetEnvironment).replace('*', 'pocket-id'),
-        },
-    ]
-}
-
-async function createOauth2ProxyDeploymentPatchFile() {
-    const targetEnvironment = process.env.TARGET_ENVIRONMENT || 'prod'
-    const targetCluster = process.env.TARGET_CLUSTER || 'gke'
-
-    return [
-        {
-            "op": "replace",
-            "path": "/spec/template/spec/containers/0/env/0",
-            "value": {
-                "name": "ISSUER_URL",
-                "value": "https://" + getHostname(targetCluster, targetEnvironment).replace('*', 'pocket-id'),
-            },
-        },
-        {
-            "op": "replace",
-            "path": "/spec/template/spec/containers/0/env/1",
-            "value": {
-                "name": "REDIRECT_URL",
-                "value": "https://multimedia-manager.testing.more-cars.net/oauth2/callback",
-            },
-        },
-        {
-            "op": "replace",
-            "path": "/spec/template/spec/containers/0/env/2",
-            "value": {
-                "name": "UPSTREAM_URL",
-                "value": "http://multimedia-manager.testing.svc.cluster.local:80",
-            },
         },
     ]
 }

@@ -7,9 +7,6 @@ resources:
   - pocket-id-deployment.yaml
   - pocket-id-service.yaml
   - pocket-id-https-route.yaml
-  - oauth2-proxy-deployment.yaml
-  - oauth2-proxy-service.yaml
-  - oauth2-proxy-health-check.yaml
 
 patches:
   - path: gateway.patch.json
@@ -24,7 +21,3 @@ patches:
     target:
       kind: HTTPRoute
       name: pocket-id
-  - path: oauth2-proxy-deployment.patch.json
-    target:
-      kind: Deployment
-      name: oauth2-proxy
