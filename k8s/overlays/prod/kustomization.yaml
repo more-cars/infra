@@ -62,3 +62,22 @@ patches:
             certificateRefs:
               - kind: Secret
                 name: infra.more-cars-certificate
+      - op: add
+        path: /spec/listeners/-
+        value:
+          name: more-cars-api-public-http
+          port: 80
+          protocol: HTTP
+          hostname: "api.more-cars.net"
+      - op: add
+        path: /spec/listeners/-
+        value:
+          name: more-cars-api-public-https
+          port: 443
+          protocol: HTTPS
+          hostname: "api.more-cars.net"
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - kind: Secret
+                name: infra.more-cars-certificate
